@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Clasificacion de vinos</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Inicio <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+    </nav>
+    <div class="container">
+        <h1 style="text-align: center;"> Clasificación de vinos MLP</h1>
+        <br>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <form>
+
+
+                            <div class="form row">
+                                <div class="form-group col-md-4">
+                                    <label for=" Alcohol"> Alcohol</label>
+                                    <input type="number" class="form-control" id="alcohol" placeholder="Alcohol">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for=" Ácido málico"> Ácido málico</label>
+                                    <input type="number" class="form-control" id="acido" placeholder="Ácido málico">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="Ceniza"> Ceniza</label>
+                                    <input type="number" class="form-control" id="ceniza" placeholder="Ceniza">
+                                </div>
+                            </div>
+
+                            <div class="form row">
+                                <div class="form-group col-md-4">
+                                    <label for="Alcalinidad "> Alcalinidad </label>
+                                    <input type="number" class="form-control" id="alcalinidad"
+                                        placeholder="Alcalinidad">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for=" Magnesio"> Magnesio</label>
+                                    <input type="number" class="form-control" id="magnesio" placeholder="Magnesio">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="Fenoles"> Fenoles</label>
+                                    <input type="number" class="form-control" id="fenoles" placeholder="Fenoles">
+                                </div>
+                            </div>
+
+                            <div class="form row">
+                                <div class="form-group col-md-4">
+                                    <label for="Flavanoides"> Flavanoides</label>
+                                    <input type="number" class="form-control" id="flavanoides"
+                                        placeholder="Flavanoides">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="Fenoles no flavonoides">No flavonoides</label>
+                                    <input type="number" class="form-control" id="noflavonoides"
+                                        placeholder="No flavonoides">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="Proantocianinas"> Proantocianinas</label>
+                                    <input type="number" class="form-control" id="proantocianina"
+                                        placeholder="Proantocianinas">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for=" Color"> Color</label>
+                                    <input type="number" class="form-control" id="color" placeholder="Color">
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label for=" Tono">Tono</label>
+                                    <input type="number" class="form-control" id="tono" placeholder="Tono">
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label for="OD280/OD315 "> OD280/OD315</label>
+                                    <input type="number" class="form-control" id="od" placeholder="OD280/OD315">
+                                </div>
+
+
+                            </div>
+
+                            <div class="form row">
+                                <div class="form-group col-md-4">
+                                    <label for="Prolina "> Prolina </label>
+                                    <input type="number" class="form-control" id="prolina " placeholder="Prolina ">
+                                   
+                                </div>
+                            </div>
+
+                      
+                            <div>
+                                <button class="btn btn-success" id="predecir" type="button">Predecir</button>
+                            </div>
+                            <br>
+                            <div style="text-align: center; height: 50% ; font-weight: bolder; font: size 100px; color: crimson;" id="resultado"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <center>
+                            <img src="wine-fondo.jpg" alt="" width="450" height="300" srcset="">
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        var modelo = null;
+        const botonPredecir = document.getElementById("predecir");
+        const alcohol = document.getElementById("alcohol");
+        const acido = document.getElementById("acido");
+        const ceniza = document.getElementById("ceniza"); 
+        const alcalinidad = document.getElementById("magnesio");
+        const magnesio = document.getElementById("alcohol");
+        const fenoles = document.getElementById("fenoles");
+        const flavanoides = document.getElementById("flavanoides");
+        const noflavanoides = document.getElementById("noflavonoides");
+        const proantocianina = document.getElementById("proantocianina");
+        const color = document.getElementById("color");
+        const tono = document.getElementById("tono");
+        const od = document.getElementById("od");
+        const prolina = document.getElementById("alcohol");
+
+        (async () => {
+            console.log("Cargando modelo...");
+            modelo = await tf.loadLayersModel("model.json");
+            console.log("Modelo cargado");
+        })();
+
+
+
+
+        function predecir() {
+            console.log(modelo)
+            if (modelo != null) {
+                console.log("entro en el if")
+                arr = [parseFloat(alcohol.value),parseFloat(acido.value), 
+                parseFloat(ceniza.value), parseFloat(alcalinidad.value), parseFloat(magnesio.value),
+            parseFloat(fenoles.value) , parseFloat(flavanoides.value) , parseFloat(noflavanoides.value),
+        parseFloat(proantocianina.value),parseFloat(color.value) ,parseFloat(tono.value),
+    parseFloat(od.value) ,parseFloat(prolina.value)]
+                var tensor = tf.tensor(arr, [1, 13])
+                var prediccion = modelo.predict(tensor).dataSync();
+                console.log(tensor)
+                console.log("prediccion del modelo")
+                console.log(prediccion)
+                let clase_tipo = 0
+
+                for (let index = 0; index < prediccion.length; index++) {
+                    if (prediccion[index] == 1) {
+                        clase_tipo = index
+                    }
+
+                }
+                console.log(alcohol.value)
+                console.log(acido.value)
+
+                document.getElementById("resultado").innerHTML = "Las caracteristicas de los datos ofrecidos pertenecen a la Clase de vino " + clase_tipo;
+            } else {
+                document.getElementById("resultado").innerHTML = "Intenta de nuevo en un momento...";
+            }
+        }
+
+        botonPredecir.onclick = predecir
+
+
+
+
+
+    </script>
+</body>
+
+</html>
